@@ -1,0 +1,23 @@
+.grid {
+    display: table;
+  }
+  
+  .grid-row {
+    display: table-row;
+  }
+  
+  .tile {
+    display: table-cell;
+    background-color: wheat;
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 10px;
+  }
+  
+  .tile.snake {
+    background-color: limegreen;
+  }
+  
+  .tile.food {
+    background-color: tomato;
+  }

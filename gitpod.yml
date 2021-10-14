@@ -1,0 +1,10 @@
+tasks:
+  - init: npm install   
+
+vscode:
+  extensions:
+    - esbenp.prettier-vscode
+
+ports:
+  - port: 3000
+    onOpen: open-preview
