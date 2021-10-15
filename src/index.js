@@ -18,9 +18,11 @@ class Tile extends React.Component {
   }
 
   componentDidMount() {
-    const middle = `${parseInt(this.props.sizeTile[0]/2)}${parseInt(this.props.sizeTile[1]/2)}`
+    const middle = `${parseInt(this.props.snakePosXTile)}${parseInt(this.props.snakePosYTile)}`
     if (middle == this.state.tileCoord) {
       this.setState({tileClass: 'tile snake'})
+    } else {
+      this.setState({tileClass: 'tile'})
     }
   }
 }
@@ -41,6 +43,8 @@ class Grid extends React.Component {
                     X={xIndex}
                     Y={yIndex}
                     sizeTile={this.props.sizeGrid}
+                    snakePosXTile={this.props.snakePosXGrid}
+                    snakePosYTile={this.props.snakePosYGrid}
                   />
                 );
               })}
@@ -57,18 +61,36 @@ class Game extends React.Component {
     super(props);
     this.state = {
         size: [7, 7],
-        snake: "",
+        snakePosX: [3],
+        snakePosY: [3],
     }
-    };
+  };
 
   render() {
     return (
       <>
         <Grid
           sizeGrid={this.state.size}
+          snakePosXGrid={this.state.snakePosX}
+          snakePosYGrid={this.state.snakePosY}
         />
       </>
     );
+  };
+
+  snakeMovement(i) {
+    switch(i) {
+      case "w":
+        const snakePosYNext = this.state.snakePosY[0] >= this.state.size[0] - 1 ? 0 : this.state.snakePosY[0] + 1;
+        this.setState({snakePosY: snakePosYNext});
+        console.log(this.state.snakePosY);
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener('keydown', (event) => {
+      this.snakeMovement(event.key);
+    });
   }
 }
 
